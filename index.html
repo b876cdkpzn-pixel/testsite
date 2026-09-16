@@ -6,7 +6,7 @@
 <title>Marsianin Studio</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 * {
     margin: 0;
@@ -21,11 +21,11 @@ html {
 body {
     font-family: Inter, sans-serif;
     background: #050509;
-    color: #fff;
+    color: white;
     overflow-x: hidden;
 }
 
-/* BACKGROUND */
+/* ===== BACKGROUND ===== */
 
 .background {
     position: fixed;
@@ -33,7 +33,7 @@ body {
     z-index: -5;
     overflow: hidden;
     background:
-        radial-gradient(circle at 50% 20%, #17112c 0%, #050509 45%);
+        radial-gradient(circle at 50% 15%, #17112c 0%, #050509 50%);
 }
 
 .grid {
@@ -42,37 +42,41 @@ body {
     width: 200%;
     height: 200%;
     background-image:
-        linear-gradient(rgba(140,90,255,.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(140,90,255,.08) 1px, transparent 1px);
+        linear-gradient(rgba(140,90,255,.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(140,90,255,.07) 1px, transparent 1px);
     background-size: 55px 55px;
-    transform: perspective(600px) rotateX(62deg) translateY(180px);
+    transform: perspective(600px) rotateX(62deg);
     animation: gridMove 18s linear infinite;
 }
 
 @keyframes gridMove {
-    from { transform: perspective(600px) rotateX(62deg) translateY(0); }
-    to { transform: perspective(600px) rotateX(62deg) translateY(55px); }
+    from {
+        transform: perspective(600px) rotateX(62deg) translateY(0);
+    }
+    to {
+        transform: perspective(600px) rotateX(62deg) translateY(55px);
+    }
 }
 
 .glow {
     position: absolute;
-    width: 400px;
-    height: 400px;
+    width: 420px;
+    height: 420px;
     border-radius: 50%;
-    filter: blur(100px);
-    opacity: .25;
+    filter: blur(110px);
+    opacity: .23;
     animation: float 8s ease-in-out infinite;
 }
 
 .glow.one {
     background: #7c3cff;
-    top: -150px;
+    top: -180px;
     left: -100px;
 }
 
 .glow.two {
     background: #2367ff;
-    right: -150px;
+    right: -170px;
     top: 25%;
     animation-delay: 2s;
 }
@@ -85,8 +89,13 @@ body {
 }
 
 @keyframes float {
-    0%,100% { transform: translate(0,0); }
-    50% { transform: translate(40px,-30px); }
+    0%,100% {
+        transform: translate(0,0);
+    }
+
+    50% {
+        transform: translate(40px,-30px);
+    }
 }
 
 #particles {
@@ -95,7 +104,7 @@ body {
     z-index: -3;
 }
 
-/* CURSOR */
+/* ===== CURSOR ===== */
 
 .cursor {
     position: fixed;
@@ -109,7 +118,7 @@ body {
     transform: translate(-50%, -50%);
 }
 
-/* HEADER */
+/* ===== HEADER ===== */
 
 header {
     position: fixed;
@@ -117,18 +126,28 @@ header {
     left: 50%;
     transform: translateX(-50%);
     width: min(1150px, calc(100% - 30px));
-    height: 70px;
+    min-height: 70px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 22px;
+
+    padding: 10px 22px;
+
     background: rgba(10,10,17,.72);
     border: 1px solid rgba(255,255,255,.09);
     border-radius: 22px;
+
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
     z-index: 1000;
-    box-shadow: 0 15px 50px rgba(0,0,0,.25);
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,.25);
 }
+
+/* ===== LOGO ===== */
 
 .logo {
     display: flex;
@@ -136,18 +155,97 @@ header {
     gap: 11px;
     font-weight: 800;
     font-size: 17px;
+    white-space: nowrap;
 }
 
 .logo-icon {
-    width: 39px;
-    height: 39px;
-    border-radius: 13px;
+    position: relative;
+
+    width: 43px;
+    height: 43px;
+
+    border-radius: 14px;
+
     display: grid;
     place-items: center;
-    background: linear-gradient(135deg,#8b5cf6,#3b82f6);
-    box-shadow: 0 0 30px rgba(124,58,237,.5);
-    font-size: 20px;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #c29aff,
+            #713cff 45%,
+            #2563eb 100%
+        );
+
+    box-shadow:
+        0 0 18px rgba(124,58,237,.65),
+        0 0 45px rgba(59,130,246,.25);
+
+    overflow: hidden;
 }
+
+.logo-core {
+    position: relative;
+    z-index: 3;
+
+    font-size: 19px;
+    font-weight: 900;
+    font-style: italic;
+
+    color: white;
+
+    text-shadow:
+        0 0 12px rgba(255,255,255,.8);
+}
+
+.logo-orbit {
+    position: absolute;
+
+    width: 50px;
+    height: 18px;
+
+    border: 2px solid rgba(255,255,255,.78);
+    border-radius: 50%;
+
+    transform: rotate(-35deg);
+
+    box-shadow:
+        0 0 10px rgba(255,255,255,.4);
+
+    animation: logoOrbit 3s linear infinite;
+}
+
+.logo-orbit::after {
+    content: "";
+
+    position: absolute;
+
+    width: 5px;
+    height: 5px;
+
+    right: 2px;
+    top: 5px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 0 10px white,
+        0 0 18px #a78bfa;
+}
+
+@keyframes logoOrbit {
+    from {
+        transform: rotate(-35deg);
+    }
+
+    to {
+        transform: rotate(325deg);
+    }
+}
+
+/* ===== NAV ===== */
 
 nav {
     display: flex;
@@ -157,11 +255,17 @@ nav {
 .nav-btn {
     border: 0;
     background: transparent;
+
     color: #9b9ba8;
+
     padding: 11px 15px;
+
     border-radius: 12px;
+
     cursor: pointer;
+
     transition: .25s;
+
     font-size: 13px;
     font-weight: 600;
 }
@@ -180,32 +284,56 @@ nav {
 
 .lang {
     border: 1px solid rgba(255,255,255,.1);
+
     background: rgba(255,255,255,.05);
+
     color: white;
+
     border-radius: 12px;
+
     padding: 10px 12px;
+
     cursor: pointer;
+
     font-weight: 700;
+
+    transition: .25s;
+}
+
+.lang:hover {
+    background: rgba(255,255,255,.1);
+    transform: translateY(-2px);
 }
 
 .telegram {
     text-decoration: none;
+
     color: white;
-    background: linear-gradient(135deg,#7c3aed,#2563eb);
+
+    background:
+        linear-gradient(135deg,#7c3aed,#2563eb);
+
     padding: 11px 15px;
+
     border-radius: 12px;
+
     font-size: 13px;
     font-weight: 700;
+
     transition: .3s;
-    box-shadow: 0 0 25px rgba(99,102,241,.25);
+
+    box-shadow:
+        0 0 25px rgba(99,102,241,.25);
 }
 
 .telegram:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 35px rgba(99,102,241,.5);
+
+    box-shadow:
+        0 0 35px rgba(99,102,241,.5);
 }
 
-/* PAGES */
+/* ===== PAGES ===== */
 
 main {
     min-height: 100vh;
@@ -213,8 +341,11 @@ main {
 
 .page {
     display: none;
+
     min-height: 100vh;
+
     padding: 150px 20px 80px;
+
     animation: pageIn .5s ease;
 }
 
@@ -227,6 +358,7 @@ main {
         opacity: 0;
         transform: translateY(15px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -234,17 +366,19 @@ main {
 }
 
 .container {
-    width: min(1100px, 100%);
+    width: min(1100px,100%);
     margin: auto;
 }
 
-/* HERO */
+/* ===== HERO ===== */
 
 .hero {
     min-height: 75vh;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     gap: 50px;
 }
 
@@ -256,124 +390,221 @@ main {
     display: inline-flex;
     align-items: center;
     gap: 8px;
+
     padding: 9px 13px;
+
     border: 1px solid rgba(139,92,246,.25);
+
     background: rgba(124,58,237,.08);
+
     border-radius: 100px;
+
     color: #bda6ff;
+
     font-size: 11px;
     font-weight: 800;
+
     letter-spacing: 1px;
+
     margin-bottom: 22px;
 }
 
 .dot {
     width: 7px;
     height: 7px;
+
     border-radius: 50%;
+
     background: #8b5cf6;
-    box-shadow: 0 0 15px #8b5cf6;
+
+    box-shadow:
+        0 0 15px #8b5cf6;
+
     animation: pulse 1.5s infinite;
 }
 
 @keyframes pulse {
-    50% { opacity: .3; transform: scale(.7); }
+    50% {
+        opacity: .3;
+        transform: scale(.7);
+    }
 }
 
 h1 {
-    font-size: clamp(48px, 7vw, 86px);
+    font-size: clamp(48px,7vw,86px);
+
     line-height: .95;
+
     letter-spacing: -5px;
+
     margin-bottom: 25px;
 }
 
 .gradient {
-    background: linear-gradient(90deg,#fff,#9b7cff,#55a5ff,#fff);
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #9b7cff,
+            #55a5ff,
+            #fff
+        );
+
     background-size: 250%;
+
     -webkit-background-clip: text;
+
     color: transparent;
-    animation: gradientMove 5s linear infinite;
+
+    animation:
+        gradientMove 5s linear infinite;
 }
 
 @keyframes gradientMove {
-    to { background-position: 250%; }
+    to {
+        background-position: 250%;
+    }
 }
 
 .hero-text {
     color: #9b9ba8;
+
     font-size: 16px;
+
     line-height: 1.8;
+
     max-width: 580px;
 }
 
 .buttons {
     display: flex;
+
     gap: 12px;
+
     margin-top: 30px;
+
     flex-wrap: wrap;
 }
 
 .btn {
     border: 0;
+
     text-decoration: none;
+
     cursor: pointer;
+
     padding: 15px 20px;
+
     border-radius: 14px;
+
     font-weight: 700;
+
     font-size: 14px;
+
     transition: .3s;
 }
 
 .btn-primary {
     color: white;
-    background: linear-gradient(135deg,#7c3aed,#2563eb);
-    box-shadow: 0 15px 35px rgba(79,70,229,.25);
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #2563eb
+        );
+
+    box-shadow:
+        0 15px 35px rgba(79,70,229,.25);
 }
 
 .btn-secondary {
     color: white;
+
     background: rgba(255,255,255,.05);
-    border: 1px solid rgba(255,255,255,.1);
+
+    border:
+        1px solid rgba(255,255,255,.1);
 }
 
 .btn:hover {
     transform: translateY(-4px);
+
+    box-shadow:
+        0 15px 35px rgba(99,102,241,.2);
 }
 
-/* HERO CARD */
+/* ===== HERO CARD ===== */
 
 .hero-card {
     width: 310px;
     height: 360px;
-    border: 1px solid rgba(255,255,255,.1);
-    background: linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.025));
+
+    border:
+        1px solid rgba(255,255,255,.1);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.025)
+        );
+
     border-radius: 30px;
+
     padding: 25px;
-    transform: rotateY(-10deg) rotateX(5deg);
+
+    transform:
+        rotateY(-10deg)
+        rotateX(5deg);
+
     box-shadow:
         0 30px 80px rgba(0,0,0,.5),
         inset 0 0 50px rgba(124,58,237,.08);
-    animation: heroFloat 5s ease-in-out infinite;
+
+    animation:
+        heroFloat 5s ease-in-out infinite;
 }
 
 @keyframes heroFloat {
-    50% { transform: rotateY(-5deg) rotateX(3deg) translateY(-15px); }
+    50% {
+        transform:
+            rotateY(-5deg)
+            rotateX(3deg)
+            translateY(-15px);
+    }
 }
 
 .preview-top {
     display: flex;
     justify-content: space-between;
+
     color: #888895;
+
     font-size: 11px;
 }
 
 .preview-logo {
     height: 150px;
+
     display: grid;
     place-items: center;
+
     font-size: 75px;
+
     margin-top: 10px;
-    filter: drop-shadow(0 0 30px #7c3aed);
+
+    filter:
+        drop-shadow(0 0 30px #7c3aed);
+
+    animation:
+        rocketFloat 3s ease-in-out infinite;
+}
+
+@keyframes rocketFloat {
+    50% {
+        transform: translateY(-10px) rotate(-4deg);
+    }
 }
 
 .preview-title {
@@ -383,61 +614,105 @@ h1 {
 
 .preview-line {
     height: 7px;
+
     width: 70%;
-    background: linear-gradient(90deg,#7c3aed,#3b82f6);
+
+    background:
+        linear-gradient(
+            90deg,
+            #7c3aed,
+            #3b82f6
+        );
+
     border-radius: 20px;
+
     margin-top: 13px;
 }
 
-/* SECTION */
+/* ===== SECTION ===== */
 
 .section-title {
     font-size: 45px;
+
     letter-spacing: -2px;
+
     margin-bottom: 10px;
 }
 
 .section-subtitle {
     color: #858591;
+
     margin-bottom: 35px;
+
     line-height: 1.7;
 }
 
-/* PROJECTS */
+/* ===== PROJECTS ===== */
 
 .projects {
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+
+    grid-template-columns:
+        repeat(3,1fr);
+
     gap: 20px;
 }
 
 .project {
     position: relative;
+
     overflow: hidden;
+
     padding: 27px;
+
     min-height: 310px;
-    border: 1px solid rgba(255,255,255,.08);
-    background: linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.02));
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.065),
+            rgba(255,255,255,.02)
+        );
+
     border-radius: 25px;
+
     transition: .4s;
+
     transform-style: preserve-3d;
 }
 
 .project:hover {
-    transform: translateY(-10px) rotateX(3deg);
-    border-color: rgba(139,92,246,.4);
-    box-shadow: 0 25px 70px rgba(0,0,0,.45),0 0 40px rgba(124,58,237,.1);
+    transform:
+        translateY(-10px)
+        rotateX(3deg);
+
+    border-color:
+        rgba(139,92,246,.4);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.45),
+        0 0 40px rgba(124,58,237,.1);
 }
 
 .project::before {
     content: "";
+
     position: absolute;
+
     width: 170px;
     height: 170px;
+
     border-radius: 50%;
+
     background: #7c3aed;
+
     filter: blur(90px);
+
     opacity: .12;
+
     right: -60px;
     top: -60px;
 }
@@ -445,13 +720,33 @@ h1 {
 .project-icon {
     width: 60px;
     height: 60px;
+
     display: grid;
     place-items: center;
+
     border-radius: 18px;
-    background: rgba(124,58,237,.12);
-    border: 1px solid rgba(139,92,246,.2);
+
+    background:
+        rgba(124,58,237,.12);
+
+    border:
+        1px solid rgba(139,92,246,.2);
+
     font-size: 28px;
+
     margin-bottom: 25px;
+
+    transition: .3s;
+}
+
+.project:hover .project-icon {
+    transform:
+        translateZ(25px)
+        rotate(-5deg)
+        scale(1.08);
+
+    box-shadow:
+        0 0 30px rgba(124,58,237,.2);
 }
 
 .project h3 {
@@ -461,57 +756,103 @@ h1 {
 
 .project p {
     color: #858591;
+
     font-size: 13px;
+
     line-height: 1.7;
 }
 
 .price {
     margin-top: 22px;
+
     font-size: 25px;
+
     font-weight: 800;
 }
 
 .price span {
     color: #ffd84d;
+
+    text-shadow:
+        0 0 15px rgba(255,216,77,.4);
 }
 
 .project-btn {
     display: block;
+
     margin-top: 18px;
+
     text-align: center;
+
     text-decoration: none;
+
     color: white;
-    background: rgba(255,255,255,.06);
-    border: 1px solid rgba(255,255,255,.08);
+
+    background:
+        rgba(255,255,255,.06);
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
     padding: 12px;
+
     border-radius: 12px;
+
     font-size: 13px;
+
     font-weight: 700;
+
     transition: .25s;
 }
 
 .project-btn:hover {
-    background: linear-gradient(135deg,#7c3aed,#2563eb);
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #2563eb
+        );
+
+    transform: translateY(-2px);
 }
 
-/* INFO */
+/* ===== ABOUT ===== */
 
 .info-grid {
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+
+    grid-template-columns:
+        repeat(3,1fr);
+
     gap: 18px;
+
     margin-top: 30px;
 }
 
 .info-card {
     padding: 30px;
+
     border-radius: 22px;
-    background: rgba(255,255,255,.04);
-    border: 1px solid rgba(255,255,255,.07);
+
+    background:
+        rgba(255,255,255,.04);
+
+    border:
+        1px solid rgba(255,255,255,.07);
+
+    transition: .3s;
+}
+
+.info-card:hover {
+    transform: translateY(-7px);
+
+    border-color:
+        rgba(139,92,246,.25);
 }
 
 .info-icon {
     font-size: 30px;
+
     margin-bottom: 18px;
 }
 
@@ -521,64 +862,99 @@ h1 {
 
 .info-card p {
     color: #858591;
+
     line-height: 1.7;
+
     font-size: 14px;
 }
 
-/* CONTACT */
+/* ===== CONTACT ===== */
 
 .contact-box {
     padding: 55px;
+
     border-radius: 30px;
+
     text-align: center;
-    border: 1px solid rgba(139,92,246,.18);
+
+    border:
+        1px solid rgba(139,92,246,.18);
+
     background:
-        radial-gradient(circle at 50% 0%,rgba(124,58,237,.18),transparent 50%),
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(124,58,237,.18),
+            transparent 50%
+        ),
         rgba(255,255,255,.035);
 }
 
 .contact-box h2 {
     font-size: 45px;
+
     margin-bottom: 15px;
 }
 
 .contact-box p {
     color: #858591;
+
     line-height: 1.7;
+
     margin-bottom: 25px;
 }
 
-/* FOOTER */
+/* ===== FOOTER ===== */
 
 footer {
     text-align: center;
+
     padding: 30px;
+
     color: #555563;
+
     font-size: 12px;
 }
 
-/* MOBILE */
+/* ===== MOBILE ===== */
 
 @media(max-width: 800px) {
 
     header {
         height: auto;
+
         min-height: 65px;
+
         padding: 10px 13px;
+
         flex-wrap: wrap;
+
         gap: 8px;
+    }
+
+    .logo {
+        font-size: 14px;
+    }
+
+    .logo-icon {
+        width: 39px;
+        height: 39px;
     }
 
     nav {
         order: 3;
+
         width: 100%;
+
         justify-content: center;
+
         overflow-x: auto;
     }
 
     .nav-btn {
         padding: 9px 10px;
+
         white-space: nowrap;
+
         font-size: 11px;
     }
 
@@ -588,18 +964,23 @@ footer {
 
     .hero {
         flex-direction: column;
+
         align-items: flex-start;
+
         padding-top: 30px;
     }
 
     h1 {
         font-size: 51px;
+
         letter-spacing: -3px;
     }
 
     .hero-card {
         width: 100%;
+
         max-width: 310px;
+
         align-self: center;
     }
 
@@ -629,44 +1010,109 @@ footer {
 
 <body>
 
+<!-- BACKGROUND -->
+
 <div class="background">
     <div class="grid"></div>
+
     <div class="glow one"></div>
     <div class="glow two"></div>
     <div class="glow three"></div>
 </div>
 
 <canvas id="particles"></canvas>
+
 <div class="cursor" id="cursor"></div>
+
+
+<!-- HEADER -->
 
 <header>
 
     <div class="logo">
-        <div class="logo-icon">M</div>
-        <span>Marsianin Studio</span>
+
+        <div class="logo-icon">
+
+            <span class="logo-orbit"></span>
+
+            <span class="logo-core">
+                M
+            </span>
+
+        </div>
+
+        <span>
+            Marsianin Studio
+        </span>
+
     </div>
 
+
     <nav>
-        <button class="nav-btn active" data-page="home" data-ru="Главная" data-en="Home">Главная</button>
-        <button class="nav-btn" data-page="projects" data-ru="Проекты" data-en="Projects">Проекты</button>
-        <button class="nav-btn" data-page="about" data-ru="О студии" data-en="About">О студии</button>
-        <button class="nav-btn" data-page="contact" data-ru="Контакты" data-en="Contact">Контакты</button>
+
+        <button
+            class="nav-btn active"
+            data-page="home"
+            data-ru="Главная"
+            data-en="Home">
+            Главная
+        </button>
+
+        <button
+            class="nav-btn"
+            data-page="projects"
+            data-ru="Проекты"
+            data-en="Projects">
+            Проекты
+        </button>
+
+        <button
+            class="nav-btn"
+            data-page="about"
+            data-ru="О студии"
+            data-en="About">
+            О студии
+        </button>
+
+        <button
+            class="nav-btn"
+            data-page="contact"
+            data-ru="Контакты"
+            data-en="Contact">
+            Контакты
+        </button>
+
     </nav>
 
+
     <div class="right">
-        <button class="lang" id="lang">🇷🇺 RU</button>
-        <a class="telegram" href="https://t.me/marsianinstudio" target="_blank">
+
+        <button
+            class="lang"
+            id="lang">
+            🇷🇺 RU
+        </button>
+
+        <a
+            class="telegram"
+            href="https://t.me/marsianinstudio"
+            target="_blank">
             Telegram
         </a>
+
     </div>
 
 </header>
 
+
 <main>
 
-<!-- HOME -->
+<!-- ================= HOME ================= -->
 
-<section class="page active" id="home">
+<section
+    class="page active"
+    id="home">
+
 <div class="container">
 
 <div class="hero">
@@ -674,225 +1120,494 @@ footer {
 <div class="hero-left">
 
 <div class="badge">
+
 <span class="dot"></span>
+
 CRMP PROJECT STORE
+
 </div>
+
 
 <h1>
-<span data-ru="Создаём." data-en="We Create.">Создаём.</span><br>
-<span class="gradient" data-ru="Запускаем." data-en="We Launch.">Запускаем.</span><br>
-<span data-ru="Развиваем." data-en="We Grow.">Развиваем.</span>
+
+<span
+data-ru="Создаём."
+data-en="We Create.">
+Создаём.
+</span>
+
+<br>
+
+<span
+class="gradient"
+data-ru="Запускаем."
+data-en="We Launch.">
+Запускаем.
+</span>
+
+<br>
+
+<span
+data-ru="Развиваем."
+data-en="We Grow.">
+Развиваем.
+</span>
+
 </h1>
 
-<p class="hero-text"
+
+<p
+class="hero-text"
 data-ru="Marsianin Studio — магазин проектов для CRMP. Выбирай подходящий проект и запускай свой сервер."
 data-en="Marsianin Studio — a CRMP project store. Choose the right project and launch your own server.">
-Marsianin Studio — магазин проектов для CRMP. Выбирай подходящий проект и запускай свой сервер.
+
+Marsianin Studio — магазин проектов для CRMP.
+Выбирай подходящий проект и запускай свой сервер.
+
 </p>
 
+
 <div class="buttons">
-<button class="btn btn-primary" onclick="openPage('projects')">
-🚀 <span data-ru="Смотреть проекты" data-en="View Projects">Смотреть проекты</span>
+
+<button
+class="btn btn-primary"
+onclick="openPage('projects')">
+
+🚀
+
+<span
+data-ru="Смотреть проекты"
+data-en="View Projects">
+Смотреть проекты
+</span>
+
 </button>
 
-<a class="btn btn-secondary" href="https://t.me/marsianinstudio" target="_blank">
+
+<a
+class="btn btn-secondary"
+href="https://t.me/marsianinstudio"
+target="_blank">
+
 ✈️ Telegram
+
 </a>
+
 </div>
 
 </div>
+
 
 <div class="hero-card">
 
 <div class="preview-top">
-<span>MARSianin</span>
-<span>01 / 03</span>
+
+<span>
+MARSIANIN
+</span>
+
+<span>
+01 / 03
+</span>
+
 </div>
 
-<div class="preview-logo">🚀</div>
 
-<div class="preview-title">CRMP PROJECT</div>
+<div class="preview-logo">
+🚀
+</div>
+
+
+<div class="preview-title">
+CRMP PROJECT
+</div>
+
+
 <div class="preview-line"></div>
 
-<div style="display:flex;justify-content:space-between;margin-top:25px;color:#777;font-size:11px">
-<span>03 PROJECTS</span>
-<span>CRMP</span>
-<span>ONLINE</span>
-</div>
+
+<div
+style="
+display:flex;
+justify-content:space-between;
+margin-top:25px;
+color:#777;
+font-size:11px">
+
+<span>
+03 PROJECTS
+</span>
+
+<span>
+CRMP
+</span>
+
+<span>
+ONLINE
+</span>
 
 </div>
 
 </div>
 
 </div>
+
+</div>
+
 </section>
 
 
-<!-- PROJECTS -->
+<!-- ================= PROJECTS ================= -->
 
-<section class="page" id="projects">
+<section
+class="page"
+id="projects">
+
 <div class="container">
 
-<h2 class="section-title"
+<h2
+class="section-title"
 data-ru="Наши проекты"
 data-en="Our Projects">
+
 Наши проекты
+
 </h2>
 
-<p class="section-subtitle"
+
+<p
+class="section-subtitle"
 data-ru="Выбери подходящий вариант для своего CRMP-проекта."
 data-en="Choose the right option for your CRMP project.">
+
 Выбери подходящий вариант для своего CRMP-проекта.
+
 </p>
+
 
 <div class="projects">
 
+
+<!-- PREMIUM -->
+
 <div class="project">
-<div class="project-icon">👑</div>
-<h3>Black Russia Premium</h3>
+
+<div class="project-icon">
+👑
+</div>
+
+<h3>
+Black Russia Premium
+</h3>
+
 <p
 data-ru="Премиальная версия проекта для запуска собственного CRMP-сервера."
 data-en="Premium project version for launching your own CRMP server.">
+
 Премиальная версия проекта для запуска собственного CRMP-сервера.
+
 </p>
-<div class="price">75 <span>⭐</span></div>
-<a class="project-btn" href="https://t.me/marsianinstudio" target="_blank">
-<span data-ru="Заказать" data-en="Order">Заказать</span> →
-</a>
+
+<div class="price">
+75 <span>⭐</span>
 </div>
 
+<a
+class="project-btn"
+href="https://t.me/marsianinstudio"
+target="_blank">
+
+<span
+data-ru="Заказать"
+data-en="Order">
+Заказать
+</span>
+
+→
+
+</a>
+
+</div>
+
+
+<!-- LITE -->
+
 <div class="project">
-<div class="project-icon">⚡</div>
-<h3>Black Russia Lite</h3>
+
+<div class="project-icon">
+⚡
+</div>
+
+<h3>
+Black Russia Lite
+</h3>
+
 <p
 data-ru="Лёгкая версия проекта для тех, кто хочет начать свой CRMP-проект."
 data-en="A lightweight version for those who want to start their CRMP project.">
+
 Лёгкая версия проекта для тех, кто хочет начать свой CRMP-проект.
+
 </p>
-<div class="price">50 <span>⭐</span></div>
-<a class="project-btn" href="https://t.me/marsianinstudio" target="_blank">
-<span data-ru="Заказать" data-en="Order">Заказать</span> →
-</a>
+
+<div class="price">
+50 <span>⭐</span>
 </div>
 
+<a
+class="project-btn"
+href="https://t.me/marsianinstudio"
+target="_blank">
+
+<span
+data-ru="Заказать"
+data-en="Order">
+Заказать
+</span>
+
+→
+
+</a>
+
+</div>
+
+
+<!-- ECONOMY -->
+
 <div class="project">
-<div class="project-icon">💎</div>
-<h3>Black Russia Economy</h3>
+
+<div class="project-icon">
+💎
+</div>
+
+<h3>
+Black Russia Economy
+</h3>
+
 <p
 data-ru="Экономичный вариант проекта с доступной стоимостью."
 data-en="An affordable project option with a lower price.">
+
 Экономичный вариант проекта с доступной стоимостью.
+
 </p>
-<div class="price">25 <span>⭐</span></div>
-<a class="project-btn" href="https://t.me/marsianinstudio" target="_blank">
-<span data-ru="Заказать" data-en="Order">Заказать</span> →
+
+<div class="price">
+25 <span>⭐</span>
+</div>
+
+<a
+class="project-btn"
+href="https://t.me/marsianinstudio"
+target="_blank">
+
+<span
+data-ru="Заказать"
+data-en="Order">
+Заказать
+</span>
+
+→
+
 </a>
+
 </div>
+
 
 </div>
 
 </div>
+
 </section>
 
 
-<!-- ABOUT -->
+<!-- ================= ABOUT ================= -->
 
-<section class="page" id="about">
+<section
+class="page"
+id="about">
+
 <div class="container">
 
-<h2 class="section-title"
+<h2
+class="section-title"
 data-ru="О Marsianin Studio"
 data-en="About Marsianin Studio">
+
 О Marsianin Studio
+
 </h2>
 
-<p class="section-subtitle"
+
+<p
+class="section-subtitle"
 data-ru="Создаём удобное место для поиска CRMP-проектов."
 data-en="A place where you can easily find CRMP projects.">
+
 Создаём удобное место для поиска CRMP-проектов.
+
 </p>
+
 
 <div class="info-grid">
 
+
 <div class="info-card">
-<div class="info-icon">🚀</div>
-<h3 data-ru="Проекты" data-en="Projects">Проекты</h3>
+
+<div class="info-icon">
+🚀
+</div>
+
+<h3
+data-ru="Проекты"
+data-en="Projects">
+
+Проекты
+
+</h3>
+
 <p
 data-ru="Подбираем проекты для разных задач и форматов запуска."
 data-en="Projects for different launch goals and formats.">
+
 Подбираем проекты для разных задач и форматов запуска.
+
 </p>
+
 </div>
 
+
 <div class="info-card">
-<div class="info-icon">⚡</div>
-<h3 data-ru="Просто" data-en="Simple">Просто</h3>
+
+<div class="info-icon">
+⚡
+</div>
+
+<h3
+data-ru="Просто"
+data-en="Simple">
+
+Просто
+
+</h3>
+
 <p
 data-ru="Выбираешь проект, нажимаешь заказать и связываешься с нами."
 data-en="Choose a project, click order and contact us.">
+
 Выбираешь проект, нажимаешь заказать и связываешься с нами.
+
 </p>
+
 </div>
 
+
 <div class="info-card">
-<div class="info-icon">💬</div>
-<h3 data-ru="Telegram" data-en="Telegram">Telegram</h3>
+
+<div class="info-icon">
+💬
+</div>
+
+<h3
+data-ru="Telegram"
+data-en="Telegram">
+
+Telegram
+
+</h3>
+
 <p
 data-ru="Все вопросы и заказы можно обсудить напрямую в Telegram."
 data-en="All questions and orders can be discussed directly on Telegram.">
+
 Все вопросы и заказы можно обсудить напрямую в Telegram.
+
 </p>
+
 </div>
+
 
 </div>
 
 </div>
+
 </section>
 
 
-<!-- CONTACT -->
+<!-- ================= CONTACT ================= -->
 
-<section class="page" id="contact">
+<section
+class="page"
+id="contact">
+
 <div class="container">
 
 <div class="contact-box">
 
-<div style="font-size:50px;margin-bottom:15px">✈️</div>
+<div
+style="
+font-size:50px;
+margin-bottom:15px">
+
+✈️
+
+</div>
+
 
 <h2
 data-ru="Свяжись с нами"
 data-en="Contact Us">
+
 Свяжись с нами
+
 </h2>
+
 
 <p
 data-ru="Есть вопрос или хочешь заказать проект? Напиши нам в Telegram."
 data-en="Have a question or want to order a project? Contact us on Telegram.">
-Есть вопрос или хочешь заказать проект? Напиши нам в Telegram.
+
+Есть вопрос или хочешь заказать проект?
+Напиши нам в Telegram.
+
 </p>
 
-<div class="buttons" style="justify-content:center">
 
-<a class="btn btn-primary"
+<div
+class="buttons"
+style="justify-content:center">
+
+
+<a
+class="btn btn-primary"
 href="https://t.me/marsianinstudio"
 target="_blank">
+
 ✈️ @marsianinstudio
+
 </a>
 
-<a class="btn btn-secondary"
+
+<a
+class="btn btn-secondary"
 href="https://t.me/Rodioooon"
 target="_blank">
+
 👤 @Rodioooon
+
 </a>
 
-</div>
 
 </div>
 
 </div>
+
+</div>
+
 </section>
 
 </main>
+
 
 <footer>
 © 2026 Marsianin Studio
@@ -901,130 +1616,208 @@ target="_blank">
 
 <script>
 
-/* PAGE SWITCHING */
+/* ================= PAGES ================= */
 
-const pages = document.querySelectorAll('.page');
-const navButtons = document.querySelectorAll('.nav-btn');
+const pages =
+document.querySelectorAll('.page');
+
+const navButtons =
+document.querySelectorAll('.nav-btn');
+
 
 function openPage(pageName) {
 
     pages.forEach(page => {
+
         page.classList.remove('active');
+
     });
 
-    document.getElementById(pageName).classList.add('active');
+
+    const selectedPage =
+        document.getElementById(pageName);
+
+    if(selectedPage) {
+
+        selectedPage.classList.add('active');
+
+    }
+
 
     navButtons.forEach(button => {
+
         button.classList.toggle(
             'active',
             button.dataset.page === pageName
         );
+
     });
+
 
     window.scrollTo({
         top: 0,
         behavior: 'smooth'
     });
+
 }
+
+
+/* NAVIGATION */
 
 navButtons.forEach(button => {
 
-    button.addEventListener('click', () => {
-        openPage(button.dataset.page);
-    });
+    button.addEventListener(
+        'click',
+        () => {
+
+            openPage(
+                button.dataset.page
+            );
+
+        }
+    );
 
 });
 
 
-/* LANGUAGE */
+/* ================= LANGUAGE ================= */
 
-let currentLang = localStorage.getItem('marsianin-language') || 'ru';
+let currentLang =
+localStorage.getItem(
+    'marsianin-language'
+) || 'ru';
 
-const langButton = document.getElementById('lang');
+
+const langButton =
+document.getElementById('lang');
+
 
 function setLanguage(lang) {
 
     currentLang = lang;
+
 
     localStorage.setItem(
         'marsianin-language',
         lang
     );
 
-    document.documentElement.lang = lang;
 
-    document.querySelectorAll('[data-ru]').forEach(element => {
+    document.documentElement.lang =
+        lang;
 
-        element.textContent =
-            element.dataset[lang];
 
-    });
+    document
+        .querySelectorAll('[data-ru]')
+        .forEach(element => {
+
+            element.textContent =
+                element.dataset[lang];
+
+        });
+
 
     langButton.textContent =
         lang === 'ru'
         ? '🇷🇺 RU'
         : '🇬🇧 EN';
+
 }
 
-langButton.addEventListener('click', () => {
 
-    setLanguage(
-        currentLang === 'ru'
-        ? 'en'
-        : 'ru'
-    );
+langButton.addEventListener(
+    'click',
+    () => {
 
-});
+        setLanguage(
+            currentLang === 'ru'
+            ? 'en'
+            : 'ru'
+        );
+
+    }
+);
+
 
 setLanguage(currentLang);
 
 
-/* CURSOR */
+/* ================= CURSOR ================= */
 
-const cursor = document.getElementById('cursor');
-
-document.addEventListener('mousemove', e => {
-
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-
-});
+const cursor =
+document.getElementById('cursor');
 
 
-/* PARTICLES */
+document.addEventListener(
+    'mousemove',
+    event => {
 
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
+        cursor.style.left =
+            event.clientX + 'px';
+
+        cursor.style.top =
+            event.clientY + 'px';
+
+    }
+);
+
+
+/* ================= PARTICLES ================= */
+
+const canvas =
+document.getElementById('particles');
+
+const ctx =
+canvas.getContext('2d');
 
 let particles = [];
 
+
 function resizeCanvas() {
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.width =
+        window.innerWidth;
+
+    canvas.height =
+        window.innerHeight;
 
 }
 
+
 resizeCanvas();
 
-window.addEventListener('resize', resizeCanvas);
+
+window.addEventListener(
+    'resize',
+    resizeCanvas
+);
+
 
 for(let i = 0; i < 90; i++) {
 
     particles.push({
 
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
+        x:
+            Math.random() *
+            window.innerWidth,
 
-        size: Math.random() * 1.8 + .3,
+        y:
+            Math.random() *
+            window.innerHeight,
 
-        speed: Math.random() * .35 + .05,
+        size:
+            Math.random() * 1.8 + .3,
 
-        opacity: Math.random() * .7 + .1
+        speed:
+            Math.random() * .35 + .05,
+
+        opacity:
+            Math.random() * .7 + .1
 
     });
 
 }
+
 
 function animateParticles() {
 
@@ -1035,16 +1828,26 @@ function animateParticles() {
         canvas.height
     );
 
+
     particles.forEach(p => {
 
         p.y -= p.speed;
 
+
         if(p.y < -5) {
-            p.y = canvas.height + 5;
-            p.x = Math.random() * canvas.width;
+
+            p.y =
+                canvas.height + 5;
+
+            p.x =
+                Math.random() *
+                canvas.width;
+
         }
 
+
         ctx.beginPath();
+
 
         ctx.arc(
             p.x,
@@ -1054,68 +1857,100 @@ function animateParticles() {
             Math.PI * 2
         );
 
+
         ctx.fillStyle =
             `rgba(170,140,255,${p.opacity})`;
+
 
         ctx.fill();
 
     });
 
-    requestAnimationFrame(animateParticles);
+
+    requestAnimationFrame(
+        animateParticles
+    );
 
 }
+
 
 animateParticles();
 
 
-/* CARD TILT */
+/* ================= CARD 3D ================= */
 
-document.querySelectorAll('.project').forEach(card => {
+document
+.querySelectorAll('.project')
+.forEach(card => {
 
-    card.addEventListener('mousemove', e => {
+    card.addEventListener(
+        'mousemove',
+        event => {
 
-        if(window.innerWidth < 800) return;
+            if(window.innerWidth < 800)
+                return;
 
-        const rect =
-            card.getBoundingClientRect();
 
-        const x =
-            e.clientX - rect.left;
+            const rect =
+                card.getBoundingClientRect();
 
-        const y =
-            e.clientY - rect.top;
 
-        const rotateY =
-            ((x / rect.width) - .5) * 8;
+            const x =
+                event.clientX -
+                rect.left;
 
-        const rotateX =
-            ((y / rect.height) - .5) * -8;
 
-        card.style.transform =
-            `translateY(-10px)
-             rotateX(${rotateX}deg)
-             rotateY(${rotateY}deg)`;
+            const y =
+                event.clientY -
+                rect.top;
 
-    });
 
-    card.addEventListener('mouseleave', () => {
+            const rotateY =
+                ((x / rect.width) - .5) * 8;
 
-        card.style.transform = '';
 
-    });
+            const rotateX =
+                ((y / rect.height) - .5) * -8;
+
+
+            card.style.transform =
+                `
+                translateY(-10px)
+                rotateX(${rotateX}deg)
+                rotateY(${rotateY}deg)
+                `;
+
+        }
+    );
+
+
+    card.addEventListener(
+        'mouseleave',
+        () => {
+
+            card.style.transform =
+                '';
+
+        }
+    );
 
 });
 
 
-/* KEYBOARD */
+/* ================= ESC ================= */
 
-document.addEventListener('keydown', e => {
+document.addEventListener(
+    'keydown',
+    event => {
 
-    if(e.key === 'Escape') {
-        openPage('home');
+        if(event.key === 'Escape') {
+
+            openPage('home');
+
+        }
+
     }
-
-});
+);
 
 </script>
 
