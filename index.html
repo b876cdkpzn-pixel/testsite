@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marsianin Studio</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Inter, sans-serif;
+    background: #050509;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* BACKGROUND */
+
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -5;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 50% 20%, #17112c 0%, #050509 45%);
+}
+
+.grid {
+    position: absolute;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    background-image:
+        linear-gradient(rgba(140,90,255,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(140,90,255,.08) 1px, transparent 1px);
+    background-size: 55px 55px;
+    transform: perspective(600px) rotateX(62deg) translateY(180px);
+    animation: gridMove 18s linear infinite;
+}
+
+@keyframes gridMove {
+    from { transform: perspective(600px) rotateX(62deg) translateY(0); }
+    to { transform: perspective(600px) rotateX(62deg) translateY(55px); }
+}
+
+.glow {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: .25;
+    animation: float 8s ease-in-out infinite;
+}
+
+.glow.one {
+    background: #7c3cff;
+    top: -150px;
+    left: -100px;
+}
+
+.glow.two {
+    background: #2367ff;
+    right: -150px;
+    top: 25%;
+    animation-delay: 2s;
+}
+
+.glow.three {
+    background: #bd35ff;
+    left: 35%;
+    bottom: -250px;
+    animation-delay: 4s;
+}
+
+@keyframes float {
+    0%,100% { transform: translate(0,0); }
+    50% { transform: translate(40px,-30px); }
+}
+
+#particles {
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+}
+
+/* CURSOR */
+
+.cursor {
+    position: fixed;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: rgba(150,90,255,.35);
+    filter: blur(8px);
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+}
+
+/* HEADER */
+
+header {
+    position: fixed;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1150px, calc(100% - 30px));
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 22px;
+    background: rgba(10,10,17,.72);
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 22px;
+    backdrop-filter: blur(20px);
+    z-index: 1000;
+    box-shadow: 0 15px 50px rgba(0,0,0,.25);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-weight: 800;
+    font-size: 17px;
+}
+
+.logo-icon {
+    width: 39px;
+    height: 39px;
+    border-radius: 13px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg,#8b5cf6,#3b82f6);
+    box-shadow: 0 0 30px rgba(124,58,237,.5);
+    font-size: 20px;
+}
+
+nav {
+    display: flex;
+    gap: 7px;
+}
+
+.nav-btn {
+    border: 0;
+    background: transparent;
+    color: #9b9ba8;
+    padding: 11px 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: .25s;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+    color: white;
+    background: rgba(255,255,255,.08);
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.lang {
+    border: 1px solid rgba(255,255,255,.1);
+    background: rgba(255,255,255,.05);
+    color: white;
+    border-radius: 12px;
+    padding: 10px 12px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.telegram {
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(135deg,#7c3aed,#2563eb);
+    padding: 11px 15px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    transition: .3s;
+    box-shadow: 0 0 25px rgba(99,102,241,.25);
+}
+
+.telegram:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 35px rgba(99,102,241,.5);
+}
+
+/* PAGES */
+
+main {
+    min-height: 100vh;
+}
+
+.page {
+    display: none;
+    min-height: 100vh;
+    padding: 150px 20px 80px;
+    animation: pageIn .5s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes pageIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    width: min(1100px, 100%);
+    margin: auto;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.hero-left {
+    max-width: 650px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 13px;
+    border: 1px solid rgba(139,92,246,.25);
+    background: rgba(124,58,237,.08);
+    border-radius: 100px;
+    color: #bda6ff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 22px;
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #8b5cf6;
+    box-shadow: 0 0 15px #8b5cf6;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    50% { opacity: .3; transform: scale(.7); }
+}
+
+h1 {
+    font-size: clamp(48px, 7vw, 86px);
+    line-height: .95;
+    letter-spacing: -5px;
+    margin-bottom: 25px;
+}
+
+.gradient {
+    background: linear-gradient(90deg,#fff,#9b7cff,#55a5ff,#fff);
+    background-size: 250%;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: gradientMove 5s linear infinite;
+}
+
+@keyframes gradientMove {
+    to { background-position: 250%; }
+}
+
+.hero-text {
+    color: #9b9ba8;
+    font-size: 16px;
+    line-height: 1.8;
+    max-width: 580px;
+}
+
+.buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    border: 0;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 15px 20px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 14px;
+    transition: .3s;
+}
+
+.btn-primary {
+    color: white;
+    background: linear-gradient(135deg,#7c3aed,#2563eb);
+    box-shadow: 0 15px 35px rgba(79,70,229,.25);
+}
+
+.btn-secondary {
+    color: white;
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.1);
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+}
+
+/* HERO CARD */
+
+.hero-card {
+    width: 310px;
+    height: 360px;
+    border: 1px solid rgba(255,255,255,.1);
+    background: linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.025));
+    border-radius: 30px;
+    padding: 25px;
+    transform: rotateY(-10deg) rotateX(5deg);
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.5),
+        inset 0 0 50px rgba(124,58,237,.08);
+    animation: heroFloat 5s ease-in-out infinite;
+}
+
+@keyframes heroFloat {
+    50% { transform: rotateY(-5deg) rotateX(3deg) translateY(-15px); }
+}
+
+.preview-top {
+    display: flex;
+    justify-content: space-between;
+    color: #888895;
+    font-size: 11px;
+}
+
+.preview-logo {
+    height: 150px;
+    display: grid;
+    place-items: center;
+    font-size: 75px;
+    margin-top: 10px;
+    filter: drop-shadow(0 0 30px #7c3aed);
+}
+
+.preview-title {
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.preview-line {
+    height: 7px;
+    width: 70%;
+    background: linear-gradient(90deg,#7c3aed,#3b82f6);
+    border-radius: 20px;
+    margin-top: 13px;
+}
+
+/* SECTION */
+
+.section-title {
+    font-size: 45px;
+    letter-spacing: -2px;
+    margin-bottom: 10px;
+}
+
+.section-subtitle {
+    color: #858591;
+    margin-bottom: 35px;
+    line-height: 1.7;
+}
+
+/* PROJECTS */
+
+.projects {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+}
+
+.project {
+    position: relative;
+    overflow: hidden;
+    padding: 27px;
+    min-height: 310px;
+    border: 1px solid rgba(255,255,255,.08);
+    background: linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.02));
+    border-radius: 25px;
+    transition: .4s;
+    transform-style: preserve-3d;
+}
+
+.project:hover {
+    transform: translateY(-10px) rotateX(3deg);
+    border-color: rgba(139,92,246,.4);
+    box-shadow: 0 25px 70px rgba(0,0,0,.45),0 0 40px rgba(124,58,237,.1);
+}
+
+.project::before {
+    content: "";
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background: #7c3aed;
+    filter: blur(90px);
+    opacity: .12;
+    right: -60px;
+    top: -60px;
+}
+
+.project-icon {
+    width: 60px;
+    height: 60px;
+    display: grid;
+    place-items: center;
+    border-radius: 18px;
+    background: rgba(124,58,237,.12);
+    border: 1px solid rgba(139,92,246,.2);
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+
+.project h3 {
+    font-size: 23px;
+    margin-bottom: 8px;
+}
+
+.project p {
+    color: #858591;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.price {
+    margin-top: 22px;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.price span {
+    color: #ffd84d;
+}
+
+.project-btn {
+    display: block;
+    margin-top: 18px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.08);
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    transition: .25s;
+}
+
+.project-btn:hover {
+    background: linear-gradient(135deg,#7c3aed,#2563eb);
+}
+
+/* INFO */
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 18px;
+    margin-top: 30px;
+}
+
+.info-card {
+    padding: 30px;
+    border-radius: 22px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.07);
+}
+
+.info-icon {
+    font-size: 30px;
+    margin-bottom: 18px;
+}
+
+.info-card h3 {
+    margin-bottom: 10px;
+}
+
+.info-card p {
+    color: #858591;
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+/* CONTACT */
+
+.contact-box {
+    padding: 55px;
+    border-radius: 30px;
+    text-align: center;
+    border: 1px solid rgba(139,92,246,.18);
+    background:
+        radial-gradient(circle at 50% 0%,rgba(124,58,237,.18),transparent 50%),
+        rgba(255,255,255,.035);
+}
+
+.contact-box h2 {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.contact-box p {
+    color: #858591;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #555563;
+    font-size: 12px;
+}
+
+/* MOBILE */
+
+@media(max-width: 800px) {
+
+    header {
+        height: auto;
+        min-height: 65px;
+        padding: 10px 13px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        overflow-x: auto;
+    }
+
+    .nav-btn {
+        padding: 9px 10px;
+        white-space: nowrap;
+        font-size: 11px;
+    }
+
+    .telegram {
+        display: none;
+    }
+
+    .hero {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-top: 30px;
+    }
+
+    h1 {
+        font-size: 51px;
+        letter-spacing: -3px;
+    }
+
+    .hero-card {
+        width: 100%;
+        max-width: 310px;
+        align-self: center;
+    }
+
+    .projects,
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title {
+        font-size: 36px;
+    }
+
+    .contact-box {
+        padding: 35px 20px;
+    }
+
+    .contact-box h2 {
+        font-size: 35px;
+    }
+
+    .cursor {
+        display: none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="grid"></div>
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+    <div class="glow three"></div>
+</div>
+
+<canvas id="particles"></canvas>
+<div class="cursor" id="cursor"></div>
+
+<header>
+
+    <div class="logo">
+        <div class="logo-icon">M</div>
+        <span>Marsianin Studio</span>
+    </div>
+
+    <nav>
+        <button class="nav-btn active" data-page="home" data-ru="Главная" data-en="Home">Главная</button>
+        <button class="nav-btn" data-page="projects" data-ru="Проекты" data-en="Projects">Проекты</button>
+        <button class="nav-btn" data-page="about" data-ru="О студии" data-en="About">О студии</button>
+        <button class="nav-btn" data-page="contact" data-ru="Контакты" data-en="Contact">Контакты</button>
+    </nav>
+
+    <div class="right">
+        <button class="lang" id="lang">🇷🇺 RU</button>
+        <a class="telegram" href="https://t.me/marsianinstudio" target="_blank">
+            Telegram
+        </a>
+    </div>
+
+</header>
+
+<main>
+
+<!-- HOME -->
+
+<section class="page active" id="home">
+<div class="container">
+
+<div class="hero">
+
+<div class="hero-left">
+
+<div class="badge">
+<span class="dot"></span>
+CRMP PROJECT STORE
+</div>
+
+<h1>
+<span data-ru="Создаём." data-en="We Create.">Создаём.</span><br>
+<span class="gradient" data-ru="Запускаем." data-en="We Launch.">Запускаем.</span><br>
+<span data-ru="Развиваем." data-en="We Grow.">Развиваем.</span>
+</h1>
+
+<p class="hero-text"
+data-ru="Marsianin Studio — магазин проектов для CRMP. Выбирай подходящий проект и запускай свой сервер."
+data-en="Marsianin Studio — a CRMP project store. Choose the right project and launch your own server.">
+Marsianin Studio — магазин проектов для CRMP. Выбирай подходящий проект и запускай свой сервер.
+</p>
+
+<div class="buttons">
+<button class="btn btn-primary" onclick="openPage('projects')">
+🚀 <span data-ru="Смотреть проекты" data-en="View Projects">Смотреть проекты</span>
+</button>
+
+<a class="btn btn-secondary" href="https://t.me/marsianinstudio" target="_blank">
+✈️ Telegram
+</a>
+</div>
+
+</div>
+
+<div class="hero-card">
+
+<div class="preview-top">
+<span>MARSianin</span>
+<span>01 / 03</span>
+</div>
+
+<div class="preview-logo">🚀</div>
+
+<div class="preview-title">CRMP PROJECT</div>
+<div class="preview-line"></div>
+
+<div style="display:flex;justify-content:space-between;margin-top:25px;color:#777;font-size:11px">
+<span>03 PROJECTS</span>
+<span>CRMP</span>
+<span>ONLINE</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- PROJECTS -->
+
+<section class="page" id="projects">
+<div class="container">
+
+<h2 class="section-title"
+data-ru="Наши проекты"
+data-en="Our Projects">
+Наши проекты
+</h2>
+
+<p class="section-subtitle"
+data-ru="Выбери подходящий вариант для своего CRMP-проекта."
+data-en="Choose the right option for your CRMP project.">
+Выбери подходящий вариант для своего CRMP-проекта.
+</p>
+
+<div class="projects">
+
+<div class="project">
+<div class="project-icon">👑</div>
+<h3>Black Russia Premium</h3>
+<p
+data-ru="Премиальная версия проекта для запуска собственного CRMP-сервера."
+data-en="Premium project version for launching your own CRMP server.">
+Премиальная версия проекта для запуска собственного CRMP-сервера.
+</p>
+<div class="price">75 <span>⭐</span></div>
+<a class="project-btn" href="https://t.me/marsianinstudio" target="_blank">
+<span data-ru="Заказать" data-en="Order">Заказать</span> →
+</a>
+</div>
+
+<div class="project">
+<div class="project-icon">⚡</div>
+<h3>Black Russia Lite</h3>
+<p
+data-ru="Лёгкая версия проекта для тех, кто хочет начать свой CRMP-проект."
+data-en="A lightweight version for those who want to start their CRMP project.">
+Лёгкая версия проекта для тех, кто хочет начать свой CRMP-проект.
+</p>
+<div class="price">50 <span>⭐</span></div>
+<a class="project-btn" href="https://t.me/marsianinstudio" target="_blank">
+<span data-ru="Заказать" data-en="Order">Заказать</span> →
+</a>
+</div>
+
+<div class="project">
+<div class="project-icon">💎</div>
+<h3>Black Russia Economy</h3>
+<p
+data-ru="Экономичный вариант проекта с доступной стоимостью."
+data-en="An affordable project option with a lower price.">
+Экономичный вариант проекта с доступной стоимостью.
+</p>
+<div class="price">25 <span>⭐</span></div>
+<a class="project-btn" href="https://t.me/marsianinstudio" target="_blank">
+<span data-ru="Заказать" data-en="Order">Заказать</span> →
+</a>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- ABOUT -->
+
+<section class="page" id="about">
+<div class="container">
+
+<h2 class="section-title"
+data-ru="О Marsianin Studio"
+data-en="About Marsianin Studio">
+О Marsianin Studio
+</h2>
+
+<p class="section-subtitle"
+data-ru="Создаём удобное место для поиска CRMP-проектов."
+data-en="A place where you can easily find CRMP projects.">
+Создаём удобное место для поиска CRMP-проектов.
+</p>
+
+<div class="info-grid">
+
+<div class="info-card">
+<div class="info-icon">🚀</div>
+<h3 data-ru="Проекты" data-en="Projects">Проекты</h3>
+<p
+data-ru="Подбираем проекты для разных задач и форматов запуска."
+data-en="Projects for different launch goals and formats.">
+Подбираем проекты для разных задач и форматов запуска.
+</p>
+</div>
+
+<div class="info-card">
+<div class="info-icon">⚡</div>
+<h3 data-ru="Просто" data-en="Simple">Просто</h3>
+<p
+data-ru="Выбираешь проект, нажимаешь заказать и связываешься с нами."
+data-en="Choose a project, click order and contact us.">
+Выбираешь проект, нажимаешь заказать и связываешься с нами.
+</p>
+</div>
+
+<div class="info-card">
+<div class="info-icon">💬</div>
+<h3 data-ru="Telegram" data-en="Telegram">Telegram</h3>
+<p
+data-ru="Все вопросы и заказы можно обсудить напрямую в Telegram."
+data-en="All questions and orders can be discussed directly on Telegram.">
+Все вопросы и заказы можно обсудить напрямую в Telegram.
+</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- CONTACT -->
+
+<section class="page" id="contact">
+<div class="container">
+
+<div class="contact-box">
+
+<div style="font-size:50px;margin-bottom:15px">✈️</div>
+
+<h2
+data-ru="Свяжись с нами"
+data-en="Contact Us">
+Свяжись с нами
+</h2>
+
+<p
+data-ru="Есть вопрос или хочешь заказать проект? Напиши нам в Telegram."
+data-en="Have a question or want to order a project? Contact us on Telegram.">
+Есть вопрос или хочешь заказать проект? Напиши нам в Telegram.
+</p>
+
+<div class="buttons" style="justify-content:center">
+
+<a class="btn btn-primary"
+href="https://t.me/marsianinstudio"
+target="_blank">
+✈️ @marsianinstudio
+</a>
+
+<a class="btn btn-secondary"
+href="https://t.me/Rodioooon"
+target="_blank">
+👤 @Rodioooon
+</a>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+</main>
+
+<footer>
+© 2026 Marsianin Studio
+</footer>
+
+
+<script>
+
+/* PAGE SWITCHING */
+
+const pages = document.querySelectorAll('.page');
+const navButtons = document.querySelectorAll('.nav-btn');
+
+function openPage(pageName) {
+
+    pages.forEach(page => {
+        page.classList.remove('active');
+    });
+
+    document.getElementById(pageName).classList.add('active');
+
+    navButtons.forEach(button => {
+        button.classList.toggle(
+            'active',
+            button.dataset.page === pageName
+        );
+    });
+
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+navButtons.forEach(button => {
+
+    button.addEventListener('click', () => {
+        openPage(button.dataset.page);
+    });
+
+});
+
+
+/* LANGUAGE */
+
+let currentLang = localStorage.getItem('marsianin-language') || 'ru';
+
+const langButton = document.getElementById('lang');
+
+function setLanguage(lang) {
+
+    currentLang = lang;
+
+    localStorage.setItem(
+        'marsianin-language',
+        lang
+    );
+
+    document.documentElement.lang = lang;
+
+    document.querySelectorAll('[data-ru]').forEach(element => {
+
+        element.textContent =
+            element.dataset[lang];
+
+    });
+
+    langButton.textContent =
+        lang === 'ru'
+        ? '🇷🇺 RU'
+        : '🇬🇧 EN';
+}
+
+langButton.addEventListener('click', () => {
+
+    setLanguage(
+        currentLang === 'ru'
+        ? 'en'
+        : 'ru'
+    );
+
+});
+
+setLanguage(currentLang);
+
+
+/* CURSOR */
+
+const cursor = document.getElementById('cursor');
+
+document.addEventListener('mousemove', e => {
+
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+
+});
+
+
+/* PARTICLES */
+
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+
+let particles = [];
+
+function resizeCanvas() {
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+}
+
+resizeCanvas();
+
+window.addEventListener('resize', resizeCanvas);
+
+for(let i = 0; i < 90; i++) {
+
+    particles.push({
+
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+
+        size: Math.random() * 1.8 + .3,
+
+        speed: Math.random() * .35 + .05,
+
+        opacity: Math.random() * .7 + .1
+
+    });
+
+}
+
+function animateParticles() {
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    particles.forEach(p => {
+
+        p.y -= p.speed;
+
+        if(p.y < -5) {
+            p.y = canvas.height + 5;
+            p.x = Math.random() * canvas.width;
+        }
+
+        ctx.beginPath();
+
+        ctx.arc(
+            p.x,
+            p.y,
+            p.size,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle =
+            `rgba(170,140,255,${p.opacity})`;
+
+        ctx.fill();
+
+    });
+
+    requestAnimationFrame(animateParticles);
+
+}
+
+animateParticles();
+
+
+/* CARD TILT */
+
+document.querySelectorAll('.project').forEach(card => {
+
+    card.addEventListener('mousemove', e => {
+
+        if(window.innerWidth < 800) return;
+
+        const rect =
+            card.getBoundingClientRect();
+
+        const x =
+            e.clientX - rect.left;
+
+        const y =
+            e.clientY - rect.top;
+
+        const rotateY =
+            ((x / rect.width) - .5) * 8;
+
+        const rotateX =
+            ((y / rect.height) - .5) * -8;
+
+        card.style.transform =
+            `translateY(-10px)
+             rotateX(${rotateX}deg)
+             rotateY(${rotateY}deg)`;
+
+    });
+
+    card.addEventListener('mouseleave', () => {
+
+        card.style.transform = '';
+
+    });
+
+});
+
+
+/* KEYBOARD */
+
+document.addEventListener('keydown', e => {
+
+    if(e.key === 'Escape') {
+        openPage('home');
+    }
+
+});
+
+</script>
+
+</body>
+</html>
