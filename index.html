@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -1766,27 +1765,52 @@ body::before{
     border-radius:20px;
 
     background:
-        rgba(255,255,255,.035);
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.018)
+        );
 
     border:1px solid rgba(255,255,255,.07);
 
     position:relative;
 
+    overflow:hidden;
+
     transition:.3s;
 }
 
+.review::before{
+    content:"“";
+
+    position:absolute;
+    right:16px;
+    top:0;
+
+    font-size:80px;
+    line-height:1;
+
+    color:rgba(139,92,246,.08);
+
+    font-family:Georgia,serif;
+}
+
 .review:hover{
-    transform:translateY(-5px);
+    transform:translateY(-7px);
+
     border-color:rgba(139,92,246,.3);
 
     box-shadow:
-        0 20px 50px rgba(0,0,0,.3);
+        0 20px 50px rgba(0,0,0,.3),
+        0 0 30px rgba(124,58,237,.07);
 }
 
 .review-stars{
     color:#facc15;
     letter-spacing:2px;
     margin-bottom:14px;
+
+    font-size:13px;
 }
 
 .review-text{
@@ -1794,6 +1818,8 @@ body::before{
     line-height:1.65;
     font-size:14px;
     margin-bottom:18px;
+
+    min-height:70px;
 }
 
 .review-user{
@@ -1803,8 +1829,8 @@ body::before{
 }
 
 .review-avatar{
-    width:36px;
-    height:36px;
+    width:38px;
+    height:38px;
 
     border-radius:50%;
 
@@ -1820,6 +1846,9 @@ body::before{
 
     font-size:13px;
     font-weight:900;
+
+    box-shadow:
+        0 0 18px rgba(124,58,237,.2);
 }
 
 .review-user strong{
@@ -1830,6 +1859,7 @@ body::before{
     display:block;
     color:#555;
     margin-top:3px;
+    font-size:10px;
 }
 
 /* =========================================================
@@ -1997,6 +2027,8 @@ footer strong{
         translateY(20px);
 
     transition:.35s;
+
+    position:relative;
 }
 
 .modal.open .modal-box{
@@ -2031,10 +2063,6 @@ footer strong{
 .modal-close:hover{
     color:#fff;
     background:rgba(124,58,237,.2);
-}
-
-.modal-box{
-    position:relative;
 }
 
 .modal-number{
@@ -2223,6 +2251,10 @@ footer strong{
         flex-direction:column;
         align-items:flex-start;
     }
+
+    .reviews-title h3{
+        font-size:32px;
+    }
 }
 
 @media(max-width:520px){
@@ -2279,6 +2311,10 @@ footer strong{
 
     .modal-box h2{
         font-size:27px;
+    }
+
+    .review{
+        padding:19px;
     }
 }
 
@@ -2428,10 +2464,10 @@ footer strong{
             <h1>
 
                 <span
-                    data-ru="Создаём"
-                    data-en="We create">
+                    data-ru="Добро пожаловать в"
+                    data-en="Welcome to">
 
-                    Создаём
+                    Добро пожаловать в
 
                 </span>
 
@@ -2439,24 +2475,22 @@ footer strong{
 
                 <span
                     class="gradient-text"
-                    data-ru="проекты будущего"
-                    data-en="projects of the future">
+                    data-ru="Marsianin Studio"
+                    data-en="Marsianin Studio">
 
-                    проекты будущего
+                    Marsianin Studio
 
                 </span>
 
             </h1>
 
             <p
-                data-ru="Премиальные CRMP-проекты от Marsianin Studio. Выбирай подходящую версию, запускай свой проект и развивай его вместе с нами."
-                data-en="Premium CRMP projects by Marsianin Studio. Choose the right version, launch your project and develop it with us.">
+                data-ru="CRMP-проекты, сайты и услуги для тех, кто хочет запустить свой проект красиво, быстро и без лишних проблем."
+                data-en="CRMP projects, websites and services for those who want to launch their project beautifully, quickly and without unnecessary problems.">
 
-                Премиальные CRMP-проекты
-                от Marsianin Studio.
-                Выбирай подходящую версию,
-                запускай свой проект
-                и развивай его вместе с нами.
+                CRMP-проекты, сайты и услуги для тех,
+                кто хочет запустить свой проект красиво,
+                быстро и без лишних проблем.
 
             </p>
 
@@ -2537,8 +2571,6 @@ footer strong{
 
         </div>
 
-        <!-- CATEGORY BUTTONS -->
-
         <div class="categories">
 
             <button
@@ -2582,8 +2614,6 @@ footer strong{
             class="category-content active">
 
             <div class="projects">
-
-                <!-- PREMIUM -->
 
                 <div class="project reveal">
 
@@ -2633,8 +2663,6 @@ footer strong{
 
                 </div>
 
-                <!-- LITE -->
-
                 <div class="project reveal">
 
                     <div class="project-image lite-image"></div>
@@ -2682,8 +2710,6 @@ footer strong{
                     </div>
 
                 </div>
-
-                <!-- ECONOMY -->
 
                 <div class="project reveal">
 
@@ -2889,8 +2915,6 @@ footer strong{
 
             <div class="projects">
 
-                <!-- WEBSITE PREMIUM -->
-
                 <div class="project reveal">
 
                     <div class="project-image website-premium-image"></div>
@@ -2937,8 +2961,6 @@ footer strong{
                     </div>
 
                 </div>
-
-                <!-- WEBSITE LITE -->
 
                 <div class="project reveal">
 
@@ -3142,18 +3164,19 @@ footer strong{
             <div class="reviews-title reveal">
 
                 <h3
-                    data-ru="Отзывы покупателей"
-                    data-en="Customer reviews">
+                    data-ru="Нас уже выбирают"
+                    data-en="Already chosen by customers">
 
-                    Отзывы покупателей
+                    Нас уже выбирают
 
                 </h3>
 
                 <p
-                    data-ru="Что пишут после покупки"
-                    data-en="What customers say after purchase">
+                    data-ru="Реальные отзывы покупателей Marsianin Studio"
+                    data-en="Real reviews from Marsianin Studio customers">
 
-                    Что пишут после покупки
+                    Реальные отзывы покупателей
+                    Marsianin Studio
 
                 </p>
 
@@ -3161,57 +3184,43 @@ footer strong{
 
             <div class="reviews">
 
+                <!-- @hyhyrma -->
+
                 <div class="review reveal">
 
                     <div class="review-stars">
                         ★★★★★
                     </div>
 
-                    <div class="review-text">
-                        «Быстро, чётко, без скама. Всё получил,
-                        проект работает нормально. Советую +rep»
+                    <div
+                        class="review-text"
+                        data-ru="«Имба без скама выдал приз @Rodioooon»"
+                        data-en="«Awesome, no scam. @Rodioooon delivered the prize.»">
+
+                        «Имба без скама выдал приз @Rodioooon»
+
                     </div>
 
                     <div class="review-user">
 
                         <div class="review-avatar">
-                            R
+                            H
                         </div>
 
                         <div>
-                            <strong>@Rodioooon</strong>
-                            <small>Покупатель</small>
+                            <strong>@hyhyrma</strong>
+                            <small
+                                data-ru="Покупатель"
+                                data-en="Customer">
+                                Покупатель
+                            </small>
                         </div>
 
                     </div>
 
                 </div>
 
-                <div class="review reveal">
-
-                    <div class="review-stars">
-                        ★★★★★
-                    </div>
-
-                    <div class="review-text">
-                        «Имба без скама, выдал приз быстро.
-                        Всё чётко, спасибо!»
-                    </div>
-
-                    <div class="review-user">
-
-                        <div class="review-avatar">
-                            R
-                        </div>
-
-                        <div>
-                            <strong>@Rodioooon</strong>
-                            <small>Покупатель</small>
-                        </div>
-
-                    </div>
-
-                </div>
+                <!-- @moloxsi4ka -->
 
                 <div class="review reveal">
 
@@ -3219,61 +3228,13 @@ footer strong{
                         ★★★★★
                     </div>
 
-                    <div class="review-text">
-                        «Все ровно работает, норм проект.
-                        Быстро сделал, без обмана.»
-                    </div>
+                    <div
+                        class="review-text"
+                        data-ru="«@Rodioooon быстро четко без скама»"
+                        data-en="«@Rodioooon was fast, clear and no scam.»">
 
-                    <div class="review-user">
+                        «@Rodioooon быстро четко без скама»
 
-                        <div class="review-avatar">
-                            +
-                        </div>
-
-                        <div>
-                            <strong>+rep</strong>
-                            <small>Покупатель</small>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="review reveal">
-
-                    <div class="review-stars">
-                        ★★★★★
-                    </div>
-
-                    <div class="review-text">
-                        «Молодец, всё оформил.
-                        За проект спасибо, всё без обмана.»
-                    </div>
-
-                    <div class="review-user">
-
-                        <div class="review-avatar">
-                            ✓
-                        </div>
-
-                        <div>
-                            <strong>Покупатель</strong>
-                            <small>Отзыв</small>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="review reveal">
-
-                    <div class="review-stars">
-                        ★★★★★
-                    </div>
-
-                    <div class="review-text">
-                        «Баля, спасибо за такой проект,
-                        я не могу, от души!»
                     </div>
 
                     <div class="review-user">
@@ -3283,13 +3244,19 @@ footer strong{
                         </div>
 
                         <div>
-                            <strong>Покупатель</strong>
-                            <small>Отзыв</small>
+                            <strong>@moloxsi4ka</strong>
+                            <small
+                                data-ru="Покупатель"
+                                data-en="Customer">
+                                Покупатель
+                            </small>
                         </div>
 
                     </div>
 
                 </div>
+
+                <!-- @Ilyukha2011 -->
 
                 <div class="review reveal">
 
@@ -3297,20 +3264,103 @@ footer strong{
                         ★★★★★
                     </div>
 
-                    <div class="review-text">
-                        «Спасибо за проект. Всё без обмана,
-                        мод 2026, я доволен. Рекомендую!»
+                    <div
+                        class="review-text"
+                        data-ru="«@Rodioooon спасибо большое, без обмана выставил рекламу»"
+                        data-en="«Thank you very much @Rodioooon, no scam, the advertisement was posted.»">
+
+                        «@Rodioooon спасибо большое,
+                        без обмана выставил рекламу»
+
                     </div>
 
                     <div class="review-user">
 
                         <div class="review-avatar">
-                            26
+                            I
                         </div>
 
                         <div>
-                            <strong>Покупатель</strong>
-                            <small>Отзыв</small>
+                            <strong>@Ilyukha2011</strong>
+                            <small
+                                data-ru="Покупатель"
+                                data-en="Customer">
+                                Покупатель
+                            </small>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- @Developerdeavy -->
+
+                <div class="review reveal">
+
+                    <div class="review-stars">
+                        ★★★★★
+                    </div>
+
+                    <div
+                        class="review-text"
+                        data-ru="«@Rodioooon не скам купил проект выдал быстро советую +reps»"
+                        data-en="«@Rodioooon is not a scam. Bought a project, delivered quickly. Recommend +reps.»">
+
+                        «@Rodioooon не скам купил проект
+                        выдал быстро советую +reps»
+
+                    </div>
+
+                    <div class="review-user">
+
+                        <div class="review-avatar">
+                            D
+                        </div>
+
+                        <div>
+                            <strong>@Developerdeavy</strong>
+                            <small
+                                data-ru="Покупатель"
+                                data-en="Customer">
+                                Покупатель
+                            </small>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- @Happygomom -->
+
+                <div class="review reveal">
+
+                    <div class="review-stars">
+                        ★★★★★
+                    </div>
+
+                    <div
+                        class="review-text"
+                        data-ru="«@Rodioooon баля спасибо за такой проект я не могу отдуши»"
+                        data-en="«@Rodioooon, thank you so much for such a project, seriously, from the heart.»">
+
+                        «@Rodioooon баля спасибо
+                        за такой проект я не могу отдуши»
+
+                    </div>
+
+                    <div class="review-user">
+
+                        <div class="review-avatar">
+                            H
+                        </div>
+
+                        <div>
+                            <strong>@Happygomom</strong>
+                            <small
+                                data-ru="Покупатель"
+                                data-en="Customer">
+                                Покупатель
+                            </small>
                         </div>
 
                     </div>
@@ -3381,8 +3431,12 @@ footer strong{
 
                     <strong>5+</strong>
 
-                    <span>
+                    <span
+                        data-ru="ПРОДУКТОВ"
+                        data-en="PRODUCTS">
+
                         ПРОДУКТОВ
+
                     </span>
 
                 </div>
@@ -3391,8 +3445,12 @@ footer strong{
 
                     <strong>24/7</strong>
 
-                    <span>
+                    <span
+                        data-ru="ПОДДЕРЖКА"
+                        data-en="SUPPORT">
+
                         ПОДДЕРЖКА
+
                     </span>
 
                 </div>
@@ -3838,6 +3896,7 @@ function closeModalOutside(event){
         closeModal();
 
     }
+
 }
 
 document.addEventListener(
@@ -3884,12 +3943,6 @@ function setLang(lang){
                 );
 
             if(text){
-
-                /*
-                    Используем textContent только
-                    для элементов, у которых нет
-                    вложенных элементов.
-                */
 
                 if(element.children.length === 0){
 
@@ -3969,80 +4022,92 @@ window.addEventListener(
    3D CARDS
 ========================================================= */
 
-document
-.querySelectorAll(".project")
-.forEach(card => {
+function initProjectTilt(){
 
-    card.addEventListener(
-        "mousemove",
-        event => {
+    document
+    .querySelectorAll(".project")
+    .forEach(card => {
 
-            if(window.innerWidth <= 850){
-                return;
+        if(card.dataset.tiltReady){
+            return;
+        }
+
+        card.dataset.tiltReady = "true";
+
+        card.addEventListener(
+            "mousemove",
+            event => {
+
+                if(window.innerWidth <= 850){
+                    return;
+                }
+
+                const rect =
+                    card.getBoundingClientRect();
+
+                const x =
+                    event.clientX - rect.left;
+
+                const y =
+                    event.clientY - rect.top;
+
+                const centerX =
+                    rect.width / 2;
+
+                const centerY =
+                    rect.height / 2;
+
+                const rotateY =
+                    (x - centerX) / 28;
+
+                const rotateX =
+                    -(y - centerY) / 28;
+
+                card.style.transform =
+                    `
+                    perspective(900px)
+                    rotateX(${rotateX}deg)
+                    rotateY(${rotateY}deg)
+                    translateY(-8px)
+                    `;
+
+                card.style.setProperty(
+                    "--mouse-x",
+                    x + "px"
+                );
+
+                card.style.setProperty(
+                    "--mouse-y",
+                    y + "px"
+                );
+
             }
+        );
 
-            const rect =
-                card.getBoundingClientRect();
+        card.addEventListener(
+            "mouseleave",
+            () => {
 
-            const x =
-                event.clientX - rect.left;
+                card.style.transform = "";
 
-            const y =
-                event.clientY - rect.top;
+                card.style.setProperty(
+                    "--mouse-x",
+                    "50%"
+                );
 
-            const centerX =
-                rect.width / 2;
+                card.style.setProperty(
+                    "--mouse-y",
+                    "50%"
+                );
 
-            const centerY =
-                rect.height / 2;
+            }
+        );
 
-            const rotateY =
-                (x - centerX) / 28;
+    });
 
-            const rotateX =
-                -(y - centerY) / 28;
+}
 
-            card.style.transform =
-                `
-                perspective(900px)
-                rotateX(${rotateX}deg)
-                rotateY(${rotateY}deg)
-                translateY(-8px)
-                `;
-
-            card.style.setProperty(
-                "--mouse-x",
-                x + "px"
-            );
-
-            card.style.setProperty(
-                "--mouse-y",
-                y + "px"
-            );
-
-        }
-    );
-
-    card.addEventListener(
-        "mouseleave",
-        () => {
-
-            card.style.transform = "";
-
-            card.style.setProperty(
-                "--mouse-x",
-                "50%"
-            );
-
-            card.style.setProperty(
-                "--mouse-y",
-                "50%"
-            );
-
-        }
-    );
-
-});
+initProjectTilt();
 
 /* =========================================================
    PARTICLES
@@ -4107,7 +4172,12 @@ window.addEventListener(
 setLang(currentLang);
 
 setTimeout(
-    initReveal,
+    () => {
+
+        initReveal();
+        initProjectTilt();
+
+    },
     100
 );
 
